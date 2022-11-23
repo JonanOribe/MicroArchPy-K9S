@@ -3,7 +3,8 @@ from flask import  Flask, request
 from flask_mysqldb import MySQL
 import pymysql
 from sqlalchemy import create_engine
-from src.generics.utils_functions import get_config_file_data, json_auto_formatter
+from python.src.generics.utils_functions import createJWT
+from src.generics.utils_functions import get_config_file_data
 
 config,config_file = get_config_file_data()
 config.read(config_file)
@@ -41,4 +42,24 @@ def login():
             return createJWT(auth.username, JWT_SECRET, True)
     else:
         return 'Invalid credentials',401
-    
+
+@server.route('/validate',methods=['POST'])
+def validate():
+    encoded_jwt = request.headers['Authorization']
+
+    if not encoded_jwt:
+        return 'Missing credentials',401
+
+    encoded_jwt = encoded_jwt.split(' ')[1]
+
+    try:
+        decoded = jwt.decode(
+            encoded_jwt, JWT_SECRET, algorithms=['HS256']
+        )
+    except:
+        return 'Not authorized'
+
+    return decoded, 200
+
+if __name__ == '__main__':
+    server.run(host='0.0.0.0',port=5000)
