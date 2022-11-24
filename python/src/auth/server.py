@@ -59,4 +59,6 @@ def validate():
     return decoded, 200
 
 if __name__ == '__main__':
-    server.run(host='0.0.0.0',port=5000)
+    port_number = 5000
+    print('Listening on port '+str(port_number))
+    server.run(host='0.0.0.0',port=port_number)
