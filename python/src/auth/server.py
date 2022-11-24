@@ -1,20 +1,17 @@
 import jwt, datetime, os
-from flask import  Flask, request
+from flask import Flask, request
 from flask_mysqldb import MySQL
-import pymysql
-from sqlalchemy import create_engine
-from python.src.generics.utils_functions import createJWT
-from src.generics.utils_functions import get_config_file_data
+from utils_functions import createJWT,get_config_file_data
 
 config,config_file = get_config_file_data()
 config.read(config_file)
 
-MYSQL_HOST:str = config._defaults['MYSQL_HOST']
-MYSQL_USER:str = config._defaults['MYSQL_USER']
-MYSQL_PASSWORD:str = config._defaults['MYSQL_PASSWORD']
-MYSQL_DB:str = config._defaults['MYSQL_DB']
-MYSQL_PORT:str = config._defaults['MYSQL_PORT']
-JWT_SECRET:str = config._defaults['JWT_SECRET']
+MYSQL_HOST:str = ''#config._defaults['MYSQL_HOST']
+MYSQL_USER:str = ''#config._defaults['MYSQL_USER']
+MYSQL_PASSWORD:str = ''#config._defaults['MYSQL_PASSWORD']
+MYSQL_DB:str = ''#config._defaults['MYSQL_DB']
+MYSQL_PORT:str = ''#config._defaults['MYSQL_PORT']
+JWT_SECRET:str = ''#config._defaults['JWT_SECRET']
 
 server = Flask(__name__)
 mysql = MySQL(server)
