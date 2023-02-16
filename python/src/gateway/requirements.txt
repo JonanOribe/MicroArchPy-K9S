@@ -20,5 +20,5 @@ pymongo==4.0.1
 requests==2.27.1
 toml==0.10.2
 urllib3==1.26.8
-Werkzeug==2.0.3
+Werkzeug==2.2.3
 wrapt==1.13.3
